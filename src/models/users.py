@@ -1,4 +1,3 @@
-from rich.prompt import password
 from pydantic import BaseModel, EmailStr
 
 from src.models import events
