@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException, status
 
 from src.models.users import User, UserSignIn
 
-router = APIRouter(tags=["user"])
+router = APIRouter(tags=["user"], prefix="/users")
 
 users: dict[str, User] = {}
 
