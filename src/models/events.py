@@ -1,13 +1,33 @@
-from pydantic import BaseModel
+from sqlmodel import JSON, Column, Field, SQLModel
 
 
-class Event(BaseModel):
-    id: int
+class Event(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
     title: str
     image: str
     description: str
-    tags: list[str]
+    tags: list[str] = Field(sa_column=Column(JSON))
     location: str
+
+    class Config:
+        arbitrary_types_allowed = True
+        schema_extra = {  # noqa: RUF012
+            "example": {
+                "title": "FastAPI Book Launch",
+                "image": "https://linktomyiamge.com/image.png",
+                "description": "We will be discussing the contents of the FastAPI book in this event. Ensure to com with your own copy to win gifts!",
+                "tags": ["python", "fastapi", "book", "launch"],
+                "location": "Google Meet",
+            },
+        }
+
+
+class EventUpdate(SQLModel):
+    title: str | None
+    image: str | None
+    description: str | None
+    tags: list[str] | None
+    location: str | None
 
     class Config:
         schema_extra = {  # noqa: RUF012
