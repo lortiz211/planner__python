@@ -23,11 +23,11 @@ class Event(SQLModel, table=True):
 
 
 class EventUpdate(SQLModel):
-    title: str | None
-    image: str | None
-    description: str | None
-    tags: list[str] | None
-    location: str | None
+    title: str | None = None
+    image: str | None = None
+    description: str | None = None
+    tags: list[str] | None = None
+    location: str | None = None
 
     class Config:
         schema_extra = {  # noqa: RUF012
